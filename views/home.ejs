@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/home.css">
+    <title>Rentals</title>
+</head>
+<body class="d-flex text-center text-white bg-dark">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="mb-auto">
+        <div>
+            <h3 class="float-md-start mb-0">Rentals</h3>
+            <nav class="nav nav-masthead justify-content-center float-md-end">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link" href="/locations">Rentals</a>
+                <% if(!currentUser) {%>
+                <a class="nav-link" href="/login">Login</a>
+                <a class="nav-link" href="/register">Register</a>
+                <% } else {%>
+                <a class="nav-link" href="/logout">Logout</a>
+                <% }%>
+            </nav>
+        </div>
+    </header>
+    <main class="px-3">
+        <h1>Rentals</h1>
+        <p class="lead">Welcome to Rentals
+            <br>Your one-stop destination for finding the perfect living space for your next adventure or stay.
+            Whether you're looking for a cozy apartment, a spacious house, a luxurious mansion,
+            or a comfortable hotel room, we've got you covered. With our wide selection of rental options,
+            you can easily find the perfect home away from home that fits your unique style, preferences, and budget.
+            Our platform connects renters with property owners, making it easy to find and secure your dream living
+            space hassle-free. Start your search today and discover your next home sweet home with Rentals.</p>
+   <a href="/locations" class="btn btn-lg btn-secondary font-weight-bold border-white bg-white">View Rentals</a>
+    </main>
+    <footer class="mt-auto text-white-50">
+<p>&copy; 2023 Rentals</p>
+    </footer>
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+</body>
+</html>

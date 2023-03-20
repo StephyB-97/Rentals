@@ -1,0 +1,26 @@
+<!--Navbar used through the website-->
+<nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary d-flex">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Rentals</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link" aria-current="page" href="/">Home</a>
+                <a class="nav-link" href="/locations">Rentals</a>
+                <a class="nav-link" href="/locations/new">Add Rental</a>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <!--show this options if not an user-->
+                <% if(!currentUser) {%>
+                <a class="nav-link" href="/login">Login</a>
+                <a class="nav-link" href="/register">Register</a>
+                <%} else{%>
+                <!--Show this option only to logged in users-->
+                <a class="nav-link" href="/logout">Logout</a>
+                <%}%>
+            </div>
+        </div>
+    </div>
+</nav>

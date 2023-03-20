@@ -1,0 +1,116 @@
+<!--EJS file that shows individually each property or rental with the
+required information-->
+<% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/stylesheets/stars.css">
+
+<!--NEW CODE-->
+<div class="row">
+    <div class="col-6">
+
+        <div id="rentalCarousel" class="carousel slide">
+            <div class="carousel-inner">
+                <% rental.images.forEach((img, i) => { %>
+                    <div class="carousel-item <%= i === 0 ? 'active' : ''%>">
+                        <img src="<%=img.url%>" class="d-block w-100" alt="" crossorigin>
+                    </div>
+                <%})%>
+            </div>
+            <% if(rental.images.length > 1) {%>
+                <button class="carousel-control-prev" type="button" data-bs-target="#rentalCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#rentalCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            <% } %>
+        </div>
+
+
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><%=rental.title%></h5>
+                <p class="card-text"><%=rental.description%></p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-muted"><%=rental.location%></li>
+                <li class="list-group-item">Submitted by <%=rental.author.username%></li>
+                <li class="list-group-item">$<%=rental.price%>/night</li>
+            </ul>
+            <!--required that only the corresponding author can have this authorizations-->
+          <%if (currentUser && rental.author.equals(currentUser._id)) {%>
+            <div class="card-body">
+                <a class="class-link btn btn-info" href="/locations/<%=rental._id%>/edit">Edit</a>
+                <form class="d-inline" action="/locations/<%=rental._id%>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+              <%}%>
+        </div>
+    </div>
+    <div class="col-6">
+        <!--Map-->
+        <div id='map' ></div>
+
+        <!--Review Section-->
+        <%if(currentUser){%>
+        <h2>Leave a Review</h2>
+        <form action="/locations/<%=rental._id%>/reviews" method="POST" class="mb-3 validated-form" novalidate>
+            <div class="mb-3">
+                <!--rating-->
+
+                <!--Stars for rating code-->
+                <fieldset class="starability-basic">
+                    <legend>First rating:</legend>
+                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                    <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                    <label for="first-rate1" title="Terrible">1 star</label>
+                    <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                    <label for="first-rate2" title="Not good">2 stars</label>
+                    <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                    <label for="first-rate3" title="Average">3 stars</label>
+                    <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                    <label for="first-rate4" title="Very good">4 stars</label>
+                    <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                    <label for="first-rate5" title="Amazing">5 stars</label>
+                </fieldset>
+
+                <label class="form-label" for="body">Review</label>
+                <textarea class ="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
+                <div class="valid-feedback">Valid format</div>
+            </div>
+            <button class="btn btn-success">Submit</button>
+        </form>
+        <%}%>
+        <% for(let review of rental.reviews) {%>
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><%=review.author.username%></h5>
+                <!--Stars rating code-->
+                <p class="starability-result" data-rating="<%=review.rating%>">
+                    Rated: <%=review.rating%> stars
+                </p>
+
+
+                <p class="card-text">Review: <%=review.body%></p>
+                <!--required that only the corresponding author can have this authorizations-->
+                <%if (currentUser && review.author.equals(currentUser._id)) {%>
+                <form action="/locations/<%=rental._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
+                   <button class="btn btn-sm btn-danger">Delete</button>
+               </form>
+                <%}%>
+            </div>
+        </div>
+        <% } %>
+    </div>
+</div>
+
+<!--Token required to show the map in the individual rentals-->
+<script>
+    const mapToken= '<%-process.env.MAPBOX_TOKEN%>';
+    const rental= <%-JSON.stringify(rental)%>
+</script>
+<script src="/javascripts/showPageMap.js"></script>
+

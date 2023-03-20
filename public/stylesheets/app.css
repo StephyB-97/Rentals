@@ -1,0 +1,10 @@
+/*Code to configure the view of the 2 maps in the webpage*/
+#cluster-map{
+    width: 100%;
+    height: 500px;
+}
+
+#map{
+    width: 100%;
+    height: 300px;
+}
