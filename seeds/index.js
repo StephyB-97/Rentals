@@ -3,10 +3,10 @@ mongoose.set('strictQuery', false);              //required for the upgrade of m
 const {places, descriptors} = require('./seedHelpers');    //required to use the places and descriptors lists
 const cities = require('./cities');              //export to use the cities list
 const Location = require('../models/location');  //export for location model
-
+const dbUrl = process.env.DB_URL
 
 // Connect to MongoDB using Mongoose
-mongoose.connect('mongodb://localhost/Hotels', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect( dbUrl/*'mongodb://localhost/Hotels'*/, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('Connected to MongoDB');
     })
