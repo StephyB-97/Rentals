@@ -32,7 +32,7 @@ const CloudinaryUsername = process.env.CLOUDINARY_USERNAME
 
 
 
-/*Use the variable dbUrl when deploying, to work locally keep it like that*/
+/*Use the  variable dbUrl when deploying, to work locally keep it like that*/
 // Connect to MongoDB using Mongoose
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
